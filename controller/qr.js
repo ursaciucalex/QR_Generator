@@ -5,17 +5,7 @@ import open from 'open'
 
 
 const qrcode = (req, res) => {
-    var authheader=req.headers.authorization;
-    console.log(authheader)
-    if(!authheader){
-        
-        var err=new Error("You are not authenticated")
-        // Set the header for the response
-        res.setHeader("WWW-Authenticate",'Basic')
-        err.status=401
     
-    }
-    console.log(authheader)
     let data = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,

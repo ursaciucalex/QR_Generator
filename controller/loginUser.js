@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from '../model/userSchema.js';
+import { createToken } from '../utils/createToken.js';
 
 const loginUser = async (req, res) => {
     const body = req.body;
@@ -7,10 +8,10 @@ const loginUser = async (req, res) => {
     if (user) {
       const validPassword = await bcrypt.compare(body.password, user.password);
       if (validPassword) {
-        //body.loggedIn= true;
-        res.status(200).json({ message: "Logged in successfully - Valid password" });
-        //console.log(body.loggedIn);
-
+        const userResponse = await User.findOne({email: body.email}).select('-password');
+        userResponse.loggedIn = true;
+        const token = createToken(userResponse);
+        res.status(200).json({ message: "Logged in successfully", user: userResponse, token:token});
 
       } else {
         res.status(400).json({ error: "Invalid Password" });

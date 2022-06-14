@@ -1,6 +1,7 @@
 import User from '../model/userSchema.js';
 import bcrypt from 'bcrypt';
 import {check} from 'express-validator';
+import { createToken } from '../utils/createToken.js';
 
 const registerUser = async (req, res, next) => {
     const errors = check(req);
@@ -41,7 +42,8 @@ const registerUser = async (req, res, next) => {
             result.password = undefined;
             res.status(201).json({
                 message: 'New user added!',
-                user: result
+                user: result,
+                token: token
             })
         })
         .catch(err => {
