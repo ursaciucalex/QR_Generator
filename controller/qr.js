@@ -4,14 +4,15 @@ import User from '../model/userSchema.js'
 import open from 'open'
 
 
-const qrcode = (req, res) => {
+const  qrcode = async (req, res) => {
     
+    let user = await User.findById(req.decoded.authToken.id);
     let data = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        age: req.body.age,
-        sex: req.body.sex,
-        lastSchool: req.body.lastSchool
+        firstName: user.firstName,
+        lastName:user.lastName,
+        age:user.age,
+        sex: user.sex,
+        lastSchool: user.lastSchool
     };
     
     let strData = JSON.stringify(data)

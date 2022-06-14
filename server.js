@@ -8,7 +8,7 @@ const {connect} = connection;
 
 import userRoutes from './routes/userRoutes.js';
 
-connect(`mongodb+srv://ursaciucalex:alexandru01@database.yniwz.mongodb.net/?retryWrites=true&w=majority`, // admin and password to access the database store in file locally - PRIVATE MODE
+connect(`mongodb+srv://ursaciucalex:alexandru01@database.yniwz.mongodb.net/?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

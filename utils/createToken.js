@@ -6,7 +6,7 @@ export const createToken = (objectEncoded) => {
     console.log(objectEncoded.toString());
     const secret = getSecret();
     console.log(secret);
-    const authToken = {email: decoded.email}
+    const authToken = {id: decoded._id, email: decoded.email}
     const token = jwt.sign({authToken: authToken}, secret);
 
     return token;

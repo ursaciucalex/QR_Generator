@@ -22,7 +22,7 @@ const validateToken = async (req, res, next) => {
     try {
         result = jwt.verify(token, secret);
         
-        let usedByResponse = await User.findById(id);
+        let usedByResponse = await User.findById(result.authToken.id);
 
         if (!usedByResponse) {
             result = {
@@ -42,7 +42,7 @@ const validateToken = async (req, res, next) => {
 
             return res.status(401).json(result);
         }
-        
+    
 
         req.decoded = result;
 
@@ -59,7 +59,7 @@ const validateToken = async (req, res, next) => {
 
         return res.status(403).json({
             error: true,
-            message: "Authentication error",
+            message: error,
         });
     }
 }
